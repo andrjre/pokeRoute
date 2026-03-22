@@ -7,5 +7,44 @@
 </head>
 <body>
     
+    <select id="game">
+        <option value="firered">Fire Red</option>
+        <option value="leafgreen">Leaf Green</option>
+    </select>
+
+    <select id="routes">
+        <option value="kanto-route-1-area">Route 1</option>
+        <option value="kanto-route-2-area">Route 2</option>
+        <option value="kanto-route-3-area">Route 3</option>
+    </select>
+
+    <script>
+
+    function getEncounters() {
+        const game = document.getElementById('game').value;
+        const route = document.getElementById('routes').value;
+
+        fetch(`https://pokeapi.co/api/v2/location-area/${route}`)
+        .then(response => response.json())
+        .then(data => {
+           data.pokemon_encounters
+            .filter(encounter =>
+                encounter.version_details.some(v => v.version.name === game)
+            )
+            .forEach(encounter => {
+                const versionData = encounter.version_details.find(v => v.version.name === game);
+                const chance = versionData.encounter_details[0].chance;
+                console.log(encounter.pokemon.name, chance);
+            });  
+        });
+    }
+
+    document.getElementById('game').addEventListener('change', getEncounters);
+    document.getElementById('routes').addEventListener('change', getEncounters);
+
+  getEncounters();
+
+    </script>
+    
 </body>
 </html>
