@@ -16,6 +16,7 @@
         <option value="kanto-route-1-area">Route 1</option>
         <option value="kanto-route-2-area">Route 2</option>
         <option value="kanto-route-3-area">Route 3</option>
+        <option value="kanto-route-4-area">Route 4</option>
     </select>
 
     <script>
@@ -31,11 +32,27 @@
             .filter(encounter =>
                 encounter.version_details.some(v => v.version.name === game)
             )
+
             .forEach(encounter => {
                 const versionData = encounter.version_details.find(v => v.version.name === game);
-                const chance = versionData.encounter_details[0].chance;
-                console.log(encounter.pokemon.name, chance);
-            });  
+                const method = versionData.encounter_details[0].method;
+                let chance = versionData.max_chance;
+                let count = versionData.encounter_details;
+                let size = count.length
+                let name = encounter.pokemon.name
+        
+                if(size > 1){
+                    for(let i = 0; i < size; i++){
+                        console.log(name, versionData.encounter_details[i], method.name);
+                    }
+                }
+
+                console.log(name, chance, method.name);
+                console.log(versionData);
+                
+
+            }); 
+
         });
     }
 
