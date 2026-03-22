@@ -34,21 +34,28 @@
             )
 
             .forEach(encounter => {
+
                 const versionData = encounter.version_details.find(v => v.version.name === game);
-                const method = versionData.encounter_details[0].method;
-                let chance = versionData.max_chance;
+                let method = versionData.encounter_details[0].method;
+                let maxChance = versionData.max_chance;
                 let count = versionData.encounter_details;
                 let size = count.length
                 let name = encounter.pokemon.name
         
-                if(size > 1){
+
+                if(size => 1){
+                    let methodTotals = {};
                     for(let i = 0; i < size; i++){
-                        console.log(name, versionData.encounter_details[i], method.name);
+                        let methodName = count[i].method.name;
+                        let chance = count[i].chance;
+                        methodTotals[methodName] = (methodTotals[methodName] || 0) + chance;
                     }
+                    console.log(name, methodTotals);
+                } else {
+                    console.log("error");
                 }
 
-                console.log(name, chance, method.name);
-                console.log(versionData);
+                console.log("next pokemon");
                 
 
             }); 
