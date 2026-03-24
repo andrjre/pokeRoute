@@ -24,58 +24,23 @@
         <option value="kanto-route-9-area">Route 9</option>
         <option value="kanto-route-10-area">Route 10</option>
         <option value="kanto-route-11-area">Route 11</option>
+        <option value="kanto-route-12-area">Route 12</option>
+        <option value="kanto-route-13-area">Route 13</option>
+        <option value="kanto-route-14-area">Route 14</option>
+        <option value="kanto-route-15-area">Route 15</option>
+        <option value="kanto-route-16-area">Route 16</option>
+        <option value="kanto-route-17-area">Route 17</option>
+        <option value="kanto-route-18-area">Route 18</option>
+        <option value="kanto-route-19-area">Route 19</option>
+        <option value="kanto-route-20-area">Route 20</option>
+        <option value="kanto-route-21-area">Route 21</option>
+        <option value="kanto-route-22-area">Route 22</option>
+        <option value="kanto-route-23-area">Route 23</option>
+        <option value="kanto-route-24-area">Route 24</option>
+        <option value="kanto-route-25-area">Route 25</option>
     </select>
 
-    <script>
-
-    function getEncounters() {
-        const game = document.getElementById('game').value;
-        const route = document.getElementById('routes').value;
-
-        fetch(`https://pokeapi.co/api/v2/location-area/${route}`)
-        .then(response => response.json())
-        .then(data => {
-           data.pokemon_encounters
-            .filter(encounter =>
-                encounter.version_details.some(v => v.version.name === game)
-            )
-
-            .forEach(encounter => {
-
-                const versionData = encounter.version_details.find(v => v.version.name === game);
-                let method = versionData.encounter_details[0].method;
-                let maxChance = versionData.max_chance;
-                let count = versionData.encounter_details;
-                let size = count.length
-                let name = encounter.pokemon.name
-        
-
-                if(size => 1){
-                    let methodTotals = {};
-                    for(let i = 0; i < size; i++){
-                        let methodName = count[i].method.name;
-                        let chance = count[i].chance;
-                        methodTotals[methodName] = (methodTotals[methodName] || 0) + chance;
-                    }
-                    console.log(name, methodTotals);
-                } else {
-                    console.log("error");
-                }
-
-                console.log("next pokemon");
-                
-
-            }); 
-
-        });
-    }
-
-    document.getElementById('game').addEventListener('change', getEncounters);
-    document.getElementById('routes').addEventListener('change', getEncounters);
-
-  getEncounters();
-
-    </script>
     
+<script src="index.js"></script>
 </body>
 </html>
