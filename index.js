@@ -7,7 +7,6 @@ function getEncounters() {
     const game = document.getElementById('game').value;
     const route = document.getElementById('routes').value;     
 
-
         fetch(`https://pokeapi.co/api/v2/location-area/${route}`)
         .then(response => response.json())
         .then(data => {
@@ -19,12 +18,9 @@ function getEncounters() {
             .forEach(encounter => {
 
                 const versionData = encounter.version_details.find(v => v.version.name === game);
-                let method = versionData.encounter_details[0].method;
-                let maxChance = versionData.max_chance;
                 let count = versionData.encounter_details;
                 let size = count.length
                 let name = encounter.pokemon.name
-                
                 
                 if(size >= 1){
                     let methodTotals = {};
