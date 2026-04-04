@@ -43,4 +43,4 @@ document.getElementById('routes').addEventListener('change', getEncounters);
 
 getEncounters();
 
-
+// routes 2 19 20 21 dont work due to different naming conventions 
